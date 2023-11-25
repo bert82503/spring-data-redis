@@ -24,6 +24,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * Options to be used for with {@literal SCAN} commands.
+ * SCAN命令的选项
  *
  * @author Christoph Strobl
  * @author Thomas Darimont
