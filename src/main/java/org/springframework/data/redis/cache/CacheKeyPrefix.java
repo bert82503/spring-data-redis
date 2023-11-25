@@ -20,6 +20,8 @@ import org.springframework.util.Assert;
 /**
  * {@link CacheKeyPrefix} is a callback hook for creating custom prefixes prepended to the actual {@literal key}
  * stored in Redis.
+ * 缓存的键前缀，是一种回调钩子，用于创建自定义的前缀，在真实的键前面追加。
+ * 使用场景：业务域标识前缀
  *
  * @author Christoph Strobl
  * @author Mark Paluch
@@ -31,6 +33,7 @@ public interface CacheKeyPrefix {
 
 	/**
 	 * Default separator.
+	 * 默认的分隔符
 	 *
 	 * @since 2.3
 	 */
@@ -60,6 +63,7 @@ public interface CacheKeyPrefix {
 
 	/**
 	 * Creates a {@link CacheKeyPrefix} scheme that prefixes cache keys with the given {@link String prefix}.
+	 * 前缀缓存的键的模式
 	 *
 	 * The {@link String prefix} is prepended to the {@link String cacheName} followed by double colons.
 	 *
