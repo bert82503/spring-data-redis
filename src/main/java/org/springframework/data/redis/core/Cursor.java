@@ -20,6 +20,7 @@ import org.springframework.data.util.CloseableIterator;
 /**
  * Cursor abstraction to scan over the keyspace or elements within a data structure using a variant of a {@code SCAN}
  * command.
+ * 游标抽象，使用SCAN命令的变体扫描数据结构中的键空间或元素。
  * <p>
  * Using a Java 8 {@link #stream() java.util.stream.Stream} allows to apply additional
  * {@link java.util.stream.Stream#filter(java.util.function.Predicate) filters} and
@@ -39,7 +40,7 @@ public interface Cursor<T> extends CloseableIterator<T> {
 	 * Get the reference cursor. <br>
 	 * <strong>NOTE:</strong> the id might change while iterating items.
 	 *
-	 * @return
+	 * @return 游标下标指针
 	 */
 	long getCursorId();
 
