@@ -21,6 +21,7 @@ import org.springframework.data.redis.connection.RedisConnection;
  * A {@link BatchStrategy} to be used with {@link RedisCacheWriter}.
  * <p>
  * Mainly used to clear the cache.
+ * 批处理策略，主要用于清除缓存。
  * <p>
  * Predefined strategies using the {@link BatchStrategies#keys() KEYS} or {@link BatchStrategies#scan(int) SCAN}
  * commands can be found in {@link BatchStrategies}.
@@ -33,6 +34,7 @@ public interface BatchStrategy {
 
 	/**
 	 * Remove all keys following the given pattern.
+	 * 按照给定的模式移除所有键。
 	 *
 	 * @param connection the connection to use. Must not be {@literal null}.
 	 * @param name The cache name. Must not be {@literal null}.
