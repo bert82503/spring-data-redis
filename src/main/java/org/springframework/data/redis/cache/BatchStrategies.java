@@ -29,6 +29,7 @@ import org.springframework.util.Assert;
 
 /**
  * Collection of predefined {@link BatchStrategy} implementations using the Redis {@code KEYS} or {@code SCAN} command.
+ * 预定义的批处理策略实现，使用KEYS或SCAN命令。
  *
  * @author Mark Paluch
  * @author Christoph Strobl
@@ -53,8 +54,11 @@ public abstract class BatchStrategies {
 	/**
 	 * A {@link BatchStrategy} using a {@code SCAN} cursors and potentially multiple {@code DEL} commands to remove all
 	 * matching keys. This strategy allows a configurable batch size to optimize for scan batching.
+	 * 使用SCAN游标和可能的多个DEL命令来删除所有匹配的键。
+	 * 本策略允许可配置的批处理大小，优化扫描批处理。
 	 * <p>
 	 * Note that using the {@code SCAN} strategy might be not supported on all drivers and Redis operation modes.
+	 * 请注意，并非所有驱动程序和Redis操作模式都支持使用SCAN策略。
 	 *
 	 * @return batching strategy using {@code SCAN}.
 	 */
@@ -79,10 +83,13 @@ public abstract class BatchStrategies {
 		@Override
 		public long cleanCache(RedisConnection connection, String name, byte[] pattern) {
 
-			byte[][] keys = Optional.ofNullable(connection.keys(pattern)).orElse(Collections.emptySet())
+			// 查找与给定模式匹配的所有键
+			byte[][] keys = Optional.ofNullable(connection.keys(pattern))
+					.orElse(Collections.emptySet())
 					.toArray(new byte[0][]);
 
 			if (keys.length > 0) {
+				// 【高风险】一次性删除所有
 				connection.del(keys);
 			}
 
@@ -104,19 +111,28 @@ public abstract class BatchStrategies {
 		@Override
 		public long cleanCache(RedisConnection connection, String name, byte[] pattern) {
 
-			Cursor<byte[]> cursor = connection.scan(ScanOptions.scanOptions().count(batchSize).match(pattern).build());
+			// 扫描选项
+			ScanOptions scanOptions = ScanOptions.scanOptions()
+					.count(batchSize)
+					.match(pattern)
+					.build();
+			// 游标/指针
+			Cursor<byte[]> cursor = connection.scan(scanOptions);
 
 			long count = 0;
 
+			// 分区迭代器
 			PartitionIterator<byte[]> partitions = new PartitionIterator<>(cursor, batchSize);
 
 			while (partitions.hasNext()) {
 
+				// 键的元素列表
 				List<byte[]> keys = partitions.next();
 
 				count += keys.size();
 
 				if (keys.size() > 0) {
+					// 批量删除
 					connection.del(keys.toArray(new byte[0][]));
 				}
 			}
@@ -128,12 +144,19 @@ public abstract class BatchStrategies {
 	/**
 	 * Utility to split and buffer outcome from a {@link Iterator} into {@link List lists} of {@code T} with a maximum
 	 * chunks {@code size}.
+	 * 分区迭代器，将迭代器的结果拆分并缓冲到具有最大块大小的T列表中。
 	 *
 	 * @param <T>
 	 */
 	static class PartitionIterator<T> implements Iterator<List<T>> {
 
+		/**
+		 * 迭代器
+		 */
 		private final Iterator<T> iterator;
+		/**
+		 * 数量大小
+		 */
 		private final int size;
 
 		PartitionIterator(Iterator<T> iterator, int size) {
@@ -151,9 +174,11 @@ public abstract class BatchStrategies {
 		public List<T> next() {
 
 			if (!hasNext()) {
+				// 以指示所请求的元素不存在
 				throw new NoSuchElementException();
 			}
 
+			// 元素列表
 			List<T> list = new ArrayList<>(this.size);
 
 			while (list.size() < this.size && this.iterator.hasNext()) {
