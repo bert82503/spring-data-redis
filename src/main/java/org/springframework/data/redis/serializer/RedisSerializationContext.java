@@ -22,6 +22,7 @@ import org.springframework.util.Assert;
 
 /**
  * Serialization context for reactive use.
+ * 用于反应式使用的序列化上下文。
  * <p>
  * This context provides {@link SerializationPair}s for key, value, hash-key (field), hash-value and {@link String}
  * serialization and deserialization.

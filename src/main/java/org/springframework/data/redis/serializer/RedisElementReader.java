@@ -23,6 +23,7 @@ import org.springframework.util.Assert;
 /**
  * Strategy interface that specifies a deserializer that can deserialize a binary element representation stored in Redis
  * into an object.
+ * 策略接口，指定一个反序列化程序，该反序列化程序可以将存储在 Redis 中的二进制元素表示形式反序列化为对象。
  *
  * @author Mark Paluch
  * @author Christoph Strobl

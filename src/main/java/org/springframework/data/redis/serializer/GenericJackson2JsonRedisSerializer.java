@@ -52,6 +52,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 /**
  * Generic Jackson 2-based {@link RedisSerializer} that maps {@link Object objects} to and from {@literal JSON} using
  * dynamic typing.
+ * 基于 Jackson 2 的泛型 序列化程序，它使用动态类型将对象映射到 JSON 或从 JSON 映射对象。
  * <p>
  * {@literal JSON} reading and writing can be customized by configuring a {@link JacksonObjectReader} and
  * {@link JacksonObjectWriter}.

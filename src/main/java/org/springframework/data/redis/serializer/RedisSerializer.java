@@ -23,6 +23,7 @@ import org.springframework.util.ClassUtils;
  * implementations are designed to handle {@literal null} objects/empty arrays on serialization and deserialization
  * side. Note that Redis does not accept {@literal null} keys or values but can return null replies (for non-existing
  * keys).
+ * 对象到字节数组（二进制数据）的基本接口序列化和反序列化。
  *
  * @author Mark Pollack
  * @author Costin Leau
@@ -33,6 +34,7 @@ public interface RedisSerializer<T> {
 	/**
 	 * Obtain a {@link RedisSerializer} using java serialization. <strong>Note:</strong> Ensure that your domain objects
 	 * are actually {@link java.io.Serializable serializable}.
+	 * java序列化
 	 *
 	 * @return never {@literal null}.
 	 * @since 2.1
@@ -44,6 +46,7 @@ public interface RedisSerializer<T> {
 	/**
 	 * Obtain a {@link RedisSerializer} using java serialization with the given {@link ClassLoader}.
 	 * <strong>Note:</strong> Ensure that your domain objects are actually {@link java.io.Serializable serializable}.
+	 * java序列化
 	 *
 	 * @param classLoader the {@link ClassLoader} to use for deserialization. Can be {@literal null}.
 	 * @return new instance of {@link RedisSerializer}. Never {@literal null}.
@@ -56,6 +59,7 @@ public interface RedisSerializer<T> {
 	/**
 	 * Obtain a {@link RedisSerializer} that can read and write JSON using
 	 * <a href="https://github.com/FasterXML/jackson-core">Jackson</a>.
+	 * Jackson JSON序列化
 	 *
 	 * @return never {@literal null}.
 	 * @since 2.1
@@ -67,6 +71,7 @@ public interface RedisSerializer<T> {
 	/**
 	 * Obtain a simple {@link java.lang.String} to {@literal byte[]} (and back) serializer using
 	 * {@link java.nio.charset.StandardCharsets#UTF_8 UTF-8} as the default {@link java.nio.charset.Charset}.
+	 * 字符串序列化，UTF-8编码
 	 *
 	 * @return never {@literal null}.
 	 * @since 2.1
@@ -76,7 +81,8 @@ public interface RedisSerializer<T> {
 	}
 
 	/**
-	 * Obtain a {@link RedisSerializer} that passes thru {@code byte[]}.
+	 * Obtain a {@link RedisSerializer} that passes thur {@code byte[]}.
+	 * 字节数组序列化
 	 *
 	 * @return never {@literal null}.
 	 * @since 2.2
@@ -87,6 +93,7 @@ public interface RedisSerializer<T> {
 
 	/**
 	 * Serialize the given object to binary data.
+	 * 将给定对象序列化为二进制数据。
 	 *
 	 * @param value object to serialize. Can be {@literal null}.
 	 * @return the equivalent binary data. Can be {@literal null}.
@@ -96,6 +103,7 @@ public interface RedisSerializer<T> {
 
 	/**
 	 * Deserialize an object from the given binary data.
+	 * 从给定的二进制数据中反序列化对象。
 	 *
 	 * @param bytes object binary representation. Can be {@literal null}.
 	 * @return the equivalent object instance. Can be {@literal null}.

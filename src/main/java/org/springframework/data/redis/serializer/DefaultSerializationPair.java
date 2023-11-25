@@ -32,8 +32,8 @@ class DefaultSerializationPair<T> implements SerializationPair<T> {
 	@SuppressWarnings("unchecked")
 	DefaultSerializationPair(RedisElementReader<? extends T> reader, RedisElementWriter<? extends T> writer) {
 
-		this.reader = (RedisElementReader) reader;
-		this.writer = (RedisElementWriter) writer;
+		this.reader = (RedisElementReader<T>) reader;
+		this.writer = (RedisElementWriter<T>) writer;
 	}
 
 	@Override

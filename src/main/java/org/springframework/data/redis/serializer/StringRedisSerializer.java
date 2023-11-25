@@ -24,10 +24,13 @@ import org.springframework.util.Assert;
 /**
  * Simple {@link java.lang.String} to {@literal byte[]} (and back) serializer. Converts {@link java.lang.String Strings}
  * into bytes and vice-versa using the specified charset (by default {@literal UTF-8}).
+ * 字符串序列化，默认是UTF-8编码
  * <p>
  * Useful when the interaction with the Redis happens mainly through Strings.
+ * 当与 Redis 的交互主要通过字符串进行时很有用。
  * <p>
  * Does not perform any {@literal null} conversion since empty strings are valid keys/values.
+ * 不执行任何 null 转换，因为空字符串是有效的键/值。
  *
  * @author Costin Leau
  * @author Christoph Strobl
@@ -35,6 +38,9 @@ import org.springframework.util.Assert;
  */
 public class StringRedisSerializer implements RedisSerializer<String> {
 
+	/**
+	 * 字符集编码
+	 */
 	private final Charset charset;
 
 	/**
@@ -56,6 +62,7 @@ public class StringRedisSerializer implements RedisSerializer<String> {
 
 	/**
 	 * {@link StringRedisSerializer} to use 8 bit UCS Transformation Format.
+	 * 字符串序列化，UTF-8编码
 	 *
 	 * @see StandardCharsets#UTF_8
 	 * @since 2.1

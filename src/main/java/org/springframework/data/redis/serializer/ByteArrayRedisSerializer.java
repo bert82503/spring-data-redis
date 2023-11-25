@@ -19,12 +19,16 @@ import org.springframework.lang.Nullable;
 
 /**
  * Raw {@link RedisSerializer} using {@code byte[]}.
+ * 字节数组序列化
  *
  * @author Mark Paluch
  * @since 2.2
  */
 enum ByteArrayRedisSerializer implements RedisSerializer<byte[]> {
 
+	/**
+	 * 单实例模式
+	 */
 	INSTANCE;
 
 	@Nullable

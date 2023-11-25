@@ -17,6 +17,7 @@ package org.springframework.data.redis.serializer;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.TypeConverter;
@@ -32,6 +33,7 @@ import org.springframework.util.Assert;
  * into String and vice versa. The Strings are convert into bytes and vice-versa using the specified charset (by default
  * UTF-8). <b>Note:</b> The conversion service initialization happens automatically if the class is defined as a Spring
  * bean. <b>Note:</b> Does not handle nulls in any special way delegating everything to the container.
+ * 泛型字符串到字节数组（和返回）序列化程序。
  *
  * @author Costin Leau
  * @author Christoph Strobl
@@ -39,8 +41,17 @@ import org.springframework.util.Assert;
  */
 public class GenericToStringSerializer<T> implements RedisSerializer<T>, BeanFactoryAware {
 
+	/**
+	 * 数据类型
+	 */
 	private final Class<T> type;
+	/**
+	 * 字符集编码
+	 */
 	private final Charset charset;
+	/**
+	 * 类型转换器
+	 */
 	private Converter converter;
 
 	public GenericToStringSerializer(Class<T> type) {
@@ -88,7 +99,7 @@ public class GenericToStringSerializer<T> implements RedisSerializer<T>, BeanFac
 		}
 
 		String string = converter.convert(value, String.class);
-		return string.getBytes(charset);
+		return Objects.requireNonNull(string).getBytes(charset);
 	}
 
 	@Override
@@ -109,7 +120,13 @@ public class GenericToStringSerializer<T> implements RedisSerializer<T>, BeanFac
 
 	private final static class Converter {
 
+		/**
+		 * 类型转换服务
+		 */
 		private final @Nullable ConversionService conversionService;
+		/**
+		 * 类型转换器
+		 */
 		private final @Nullable TypeConverter typeConverter;
 
 		public Converter(ConversionService conversionService) {
@@ -126,7 +143,7 @@ public class GenericToStringSerializer<T> implements RedisSerializer<T>, BeanFac
 		<E> E convert(Object value, Class<E> targetType) {
 
 			return conversionService != null ? conversionService.convert(value, targetType)
-					: typeConverter.convertIfNecessary(value, targetType);
+					: Objects.requireNonNull(typeConverter).convertIfNecessary(value, targetType);
 		}
 	}
 }

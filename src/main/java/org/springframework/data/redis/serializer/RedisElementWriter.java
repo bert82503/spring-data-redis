@@ -23,6 +23,7 @@ import org.springframework.util.Assert;
 /**
  * Strategy interface that specifies a serializer that can serialize an element to its binary representation to be used
  * as Redis protocol payload.
+ * 策略接口，指定一个序列化程序，该序列化程序可以将元素序列化为其二进制表示形式，以用作 Redis 协议有效负载。
  *
  * @author Mark Paluch
  * @author Christoph Strobl
