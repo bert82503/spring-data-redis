@@ -17,6 +17,7 @@ package org.springframework.data.redis.connection;
 
 /**
  * Provides access to {@link RedisCommands} and the segregated command interfaces.
+ * Redis命令集提供者，提供对Redis命令集和隔离命令接口的访问。
  *
  * @author Mark Paluch
  * @since 3.0
@@ -25,6 +26,7 @@ public interface RedisCommandsProvider {
 
 	/**
 	 * Get {@link RedisCommands}.
+	 * 所有命令
 	 *
 	 * @return never {@literal null}.
 	 * @since 3.0
@@ -33,6 +35,7 @@ public interface RedisCommandsProvider {
 
 	/**
 	 * Get {@link RedisGeoCommands}.
+	 * 地理命令
 	 *
 	 * @return never {@literal null}.
 	 * @since 2.0
@@ -41,6 +44,7 @@ public interface RedisCommandsProvider {
 
 	/**
 	 * Get {@link RedisHashCommands}.
+	 * 哈希命令
 	 *
 	 * @return never {@literal null}.
 	 * @since 2.0
@@ -57,6 +61,7 @@ public interface RedisCommandsProvider {
 
 	/**
 	 * Get {@link RedisKeyCommands}.
+	 * 键命令
 	 *
 	 * @return never {@literal null}.
 	 * @since 2.0
@@ -65,6 +70,7 @@ public interface RedisCommandsProvider {
 
 	/**
 	 * Get {@link RedisListCommands}.
+	 * 列表命令
 	 *
 	 * @return never {@literal null}.
 	 * @since 2.0
@@ -73,6 +79,7 @@ public interface RedisCommandsProvider {
 
 	/**
 	 * Get {@link RedisSetCommands}.
+	 * 集合命令
 	 *
 	 * @return never {@literal null}.
 	 * @since 2.0
@@ -81,6 +88,7 @@ public interface RedisCommandsProvider {
 
 	/**
 	 * Get {@link RedisScriptingCommands}.
+	 * 脚本命令
 	 *
 	 * @return never {@literal null}.
 	 * @since 2.0
@@ -89,6 +97,7 @@ public interface RedisCommandsProvider {
 
 	/**
 	 * Get {@link RedisServerCommands}.
+	 * 服务器命令
 	 *
 	 * @return never {@literal null}.
 	 * @since 2.0
@@ -97,6 +106,7 @@ public interface RedisCommandsProvider {
 
 	/**
 	 * Get {@link RedisStreamCommands}.
+	 * 数据流命令
 	 *
 	 * @return never {@literal null}.
 	 * @since 2.2
@@ -105,6 +115,7 @@ public interface RedisCommandsProvider {
 
 	/**
 	 * Get {@link RedisStringCommands}.
+	 * 字符串命令
 	 *
 	 * @return never {@literal null}.
 	 * @since 2.0
@@ -113,6 +124,7 @@ public interface RedisCommandsProvider {
 
 	/**
 	 * Get {@link RedisZSetCommands}.
+	 * 有序集合命令
 	 *
 	 * @return never {@literal null}.
 	 * @since 2.0
