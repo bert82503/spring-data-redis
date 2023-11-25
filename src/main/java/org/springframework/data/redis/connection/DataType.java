@@ -21,6 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Enumeration of the Redis data types.
+ * Redis数据类型
  *
  * @author Costin Leau
  * @author Mark Paluch
@@ -28,8 +29,32 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public enum DataType {
 
-	NONE("none"), STRING("string"), LIST("list"), SET("set"), ZSET("zset"), HASH("hash"),
 	/**
+	 * 无类型
+	 */
+	NONE("none"),
+	/**
+	 * 字符串
+	 */
+	STRING("string"),
+	/**
+	 * 列表
+	 */
+	LIST("list"),
+	/**
+	 * 集合
+	 */
+	SET("set"),
+	/**
+	 * 有序集合
+	 */
+	ZSET("zset"),
+	/**
+	 * 哈希表
+	 */
+	HASH("hash"),
+	/**
+	 * 数据流
 	 * @since 2.2
 	 */
 	STREAM("stream");
